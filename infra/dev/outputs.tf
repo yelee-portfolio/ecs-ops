@@ -13,3 +13,15 @@ output "private_subnets" {
 output "repo" {
   value = aws_ecr_repository.app.repository_url
 }
+
+output "cluster" {
+  value = aws_ecs_cluster.main.name
+}
+
+output "service" {
+  value = aws_ecs_service.app.name
+}
+
+output "url" {
+  value = aws_lb.app.dns_name
+}
