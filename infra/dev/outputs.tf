@@ -9,3 +9,7 @@ output "public_subnets" {
 output "private_subnets" {
   value = aws_subnet.private[*].id
 }
+
+output "repo" {
+  value = aws_ecr_repository.app.repository_url
+}
