@@ -50,6 +50,13 @@ resource "aws_ecs_task_definition" "app" {
         }
       ]
 
+      secrets = [
+        {
+          name      = "APP_SECRET"
+          valueFrom = aws_secretsmanager_secret.app.arn
+        }
+      ]
+
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -107,7 +114,8 @@ resource "aws_ecs_service" "app" {
   depends_on = [
     aws_lb_listener.http,
     aws_route.private_nat,
-    aws_iam_role_policy_attachment.exec
+    aws_iam_role_policy_attachment.exec,
+    aws_iam_role_policy.secret
   ]
 
   tags = {
