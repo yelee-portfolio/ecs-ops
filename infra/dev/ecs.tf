@@ -43,6 +43,10 @@ resource "aws_ecs_task_definition" "app" {
         {
           name  = "APP_VERSION"
           value = "v1"
+        },
+        {
+          name  = "FAIL_HEALTH"
+          value = "false"
         }
       ]
 

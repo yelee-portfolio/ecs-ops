@@ -20,8 +20,8 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy" {
   metric_name         = "UnHealthyHostCount"
   statistic           = "Maximum"
   period              = 60
-  evaluation_periods  = 2
-  datapoints_to_alarm = 2
+  evaluation_periods  = 1
+  datapoints_to_alarm = 1
   threshold           = 1
   comparison_operator = "GreaterThanOrEqualToThreshold"
   treat_missing_data  = "notBreaching"
