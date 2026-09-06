@@ -79,6 +79,15 @@ resource "aws_ecs_service" "app" {
     rollback = true
   }
 
+  alarms {
+    alarm_names = [
+      aws_cloudwatch_metric_alarm.unhealthy.alarm_name
+    ]
+
+    enable   = true
+    rollback = true
+  }
+
   network_configuration {
     subnets          = aws_subnet.private[*].id
     security_groups  = [aws_security_group.app.id]
