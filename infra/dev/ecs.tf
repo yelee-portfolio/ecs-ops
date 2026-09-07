@@ -118,6 +118,12 @@ resource "aws_ecs_service" "app" {
     aws_iam_role_policy.secret
   ]
 
+  lifecycle {
+    ignore_changes = [
+      task_definition
+    ]
+  }
+
   tags = {
     Name = "ecs-ops"
   }
