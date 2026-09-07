@@ -44,7 +44,7 @@ data "aws_iam_policy_document" "gh_trust" {
       variable = "token.actions.githubusercontent.com:sub"
 
       values = [
-        "repo:yelee-portfolio/ecs-ops:ref:refs/heads/main"
+        "repo:yelee-portfolio@296016621/ecs-ops@1359876553:ref:refs/heads/main"
       ]
     }
   }
