@@ -72,3 +72,23 @@ Task Execution Role 정책에 secretsmanager:GetSecretValue 권한을 다시 추
 * ECS 배포 실패 이벤트를 EventBridge와 SNS에 연결
 * 배포 전에 Secret과 AWSCURRENT 버전이 있는지 확인
 
+## 배포 실패 알림 보완
+
+IAM 장애는 Task가 ALB에 등록되기 전에 발생했기 때문에 기존 Unhealthy Target Alarm으로 탐지되지 않았다.
+
+이를 보완하기 위해 EventBridge에서 다음 ECS 이벤트를 감지하도록 구성했다.
+
+- Detail Type: ECS Deployment State Change
+- Event Name: SERVICE_DEPLOYMENT_FAILED
+- Target: SNS Topic
+
+IAM 권한 장애를 다시 발생시킨 결과 Circuit Breaker가 배포 실패를 판정했고, EventBridge가 해당 이벤트를 SNS로 전달했다.
+
+수신한 메일에서 다음 내용을 확인했다.
+
+- SERVICE_DEPLOYMENT_FAILED
+- ECS deployment circuit breaker
+- tasks failed to start
+
+이를 통해 ALB 지표가 생성되기 전에 발생하는 Task 시작 실패도 운영자에게 통보할 수 있게 됐다.
+
